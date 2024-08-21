@@ -24,14 +24,15 @@ def main(q):
             listenSocket.settimeout(10)
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
-            command = q.get(timeout=1)
-            print(f'Socket:{command}')
-            print(addr, "connected")    # 接続した相手のipアドレスを表示
-
-            if len(command) > 0:
-                conn.sendall(command.encode())
+            print(addr, "connected")
+            try:
+                command = q.get(timeout=1)
+                print(f'Socket:{command}')
+                if len(command) > 0:
+                    conn.sendall(command.encode())
+            except Exception as e:
+                print(f'Error: command timeout{e}')
             conn.close()    # 接続を切断
-
         except Exception as e:
             print(f'Error: {e}')
 
