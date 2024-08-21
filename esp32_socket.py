@@ -13,7 +13,7 @@ def init():
 
     listenSocket.bind((ip, port))   # ソケットを特定のIPアドレスとポートに紐付け
     listenSocket.listen(5)  # 接続の待受を開始
-    listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,  1)     # 指定されたソケットオプションの値を設定
+    listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,  1)
 
 
 def main(q):
@@ -25,7 +25,7 @@ def main(q):
             print("accepting.....")
             listenSocket.settimeout(1)
             conn, addr = listenSocket.accept()  # 接続を受信
-            print(addr, "connected")    # 接続した相手のipアドレスを表示　(xxx.xxx.xxx.xxx connected)
+            print(addr, "connected")    # 接続した相手のipアドレスを表示
 
             if len(command) > 0:
                 conn.sendall(command.encode())

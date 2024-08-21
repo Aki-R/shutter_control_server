@@ -2,19 +2,25 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import threading
 import queue
 import esp32_socket
+import json
+
 
 q = queue.Queue()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 
-# ダミーのpassword
-password = 'password'
+with open('config.json', 'r') as file:
+    data = json.load(file)
+    app.secret_key = data['secret_key']
+    password = data['password']
+    port = data['port']
+
 
 @app.route('/')
 def index():
-    if session['login'] is True:
-        return render_template('top.html')
+    if 'login' in session:
+        if session['login'] is True:
+            return render_template('top.html')
     return redirect(url_for('login'))
 
 
@@ -65,7 +71,7 @@ def get_back():
 def server_run():
     control_server = threading.Thread(target=esp32_socket.main, args=(q,))
     control_server.start()
-    app.run(port=8000, debug=True, use_reloader=False)
+    app.run(port=port, debug=True, use_reloader=False)
 
 
 if __name__ == '__main__':

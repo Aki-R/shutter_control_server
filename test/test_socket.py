@@ -1,8 +1,11 @@
 import socket
+import json
 
 # サーバーの設定
-HOST = '192.168.11.18'  # サーバーのホスト
-PORT = 8000        # サーバーのポート番号
+with open('test_config.json', 'r') as file:
+    data = json.load(file)
+    HOST = data['host']     # サーバーのホスト
+    PORT = data['port']     # サーバーのポート番号
 
 # ソケットを作成してサーバーに接続
 while True:
