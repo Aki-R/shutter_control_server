@@ -21,12 +21,12 @@ def main(q):
     init()
     while True:
         try:
-            listenSocket.settimeout(10)
+            listenSocket.settimeout()
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")
             try:
-                command = q.get(timeout=1)
+                command = q.get()
                 print(f'Socket:{command}')
                 if len(command) > 0:
                     conn.sendall(command.encode())
