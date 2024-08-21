@@ -24,11 +24,11 @@ def main(q):
     init()
     while True:
         try:
+            listenSocket.settimeout(10)
+            print("accepting.....")
+            conn, addr = listenSocket.accept()  # 接続を受信
             command = q.get(timeout=1)
             print(f'Socket:{command}')
-            print("accepting.....")
-            listenSocket.settimeout(1)
-            conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")    # 接続した相手のipアドレスを表示
 
             if len(command) > 0:
