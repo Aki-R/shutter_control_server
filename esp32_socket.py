@@ -8,13 +8,10 @@ listenSocket = socket.socket()  # socketを作成
 with open('config.json', 'r') as file:
     data = json.load(file)
     port = data['socket_port']
+    ip = data['host']
 
 
 def init():
-    hostname = socket.gethostname()
-    ip = socket.gethostbyname(hostname)
-    print(ip)
-
     listenSocket.bind((ip, port))   # ソケットを特定のIPアドレスとポートに紐付け
     listenSocket.listen(5)  # 接続の待受を開始
     listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,  1)
