@@ -14,6 +14,7 @@ with open('config.json', 'r') as file:
     app.secret_key = data['secret_key']
     password = data['password']
     port = data['port']
+    host = data['host']
 
 
 @app.route('/')
@@ -71,7 +72,7 @@ def get_back():
 def server_run():
     control_server = threading.Thread(target=esp32_socket.main, args=(q,))
     control_server.start()
-    app.run(port=port, debug=True, use_reloader=False)
+    app.run(host=host, port=port, debug=True, use_reloader=False)
 
 
 if __name__ == '__main__':
