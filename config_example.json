@@ -1,5 +1,6 @@
 {
     "password": "password",
     "secret_key": "secret_key",
-    "port": 8000
+    "port": 8000,
+    "socket_port": 8010
 }

@@ -1,12 +1,16 @@
 import socket   # モジュールのインポート
 import queue
+import json
 
 
 listenSocket = socket.socket()  # socketを作成
 
+with open('config.json', 'r') as file:
+    data = json.load(file)
+    port = data['socket_port']
+
 
 def init():
-    port = 8000   # ポート指定
     hostname = socket.gethostname()
     ip = socket.gethostbyname(hostname)
     print(ip)
