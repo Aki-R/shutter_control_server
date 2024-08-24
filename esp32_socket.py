@@ -21,7 +21,7 @@ def main(q):
     init()
     while True:
         try:
-            listenSocket.settimeout()
+            #listenSocket.settimeout()
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")
@@ -33,8 +33,12 @@ def main(q):
             except Exception as e:
                 print(f'Error: command timeout{e}')
             conn.close()    # 接続を切断
+            print("connection closed")
         except Exception as e:
             print(f'Error: {e}')
+        except KeyboardInterrupt:
+            conn.close()
+            listenSocket.close()
 
 
 if __name__ == '__main__':

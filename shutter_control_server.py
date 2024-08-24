@@ -49,7 +49,7 @@ def logout():
 def get_forward():
     if session['login'] is True:
         print('Server:Up')
-        q.put('Up')
+        q.put('Up\n')
     return redirect(url_for('index'))
 
 
@@ -57,7 +57,7 @@ def get_forward():
 def get_stop():
     if session['login'] is True:
         print('Server:Stop')
-        q.put('Stop')
+        q.put('Stop\n')
     return redirect(url_for('index'))
 
 
@@ -65,14 +65,14 @@ def get_stop():
 def get_back():
     if session['login'] is True:
         print('Server:Down')
-        q.put('Down')
+        q.put('Down\n')
     return redirect(url_for('index'))
 
 
 def server_run():
     control_server = threading.Thread(target=esp32_socket.main, args=(q,))
     control_server.start()
-    app.run(host=host, port=port, debug=True, use_reloader=False)
+    app.run(host=host, port=port, debug=False, use_reloader=False)
 
 
 if __name__ == '__main__':

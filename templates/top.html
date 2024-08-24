@@ -1,25 +1,70 @@
-<!-- templates/top.html -->
-<html>
-<body>
-    <h2>Hello!</h2>
-    <p>Welcome to the Top Page.</p>
-    
-    <form method="GET" action="/Up">
-        <button type="submit" style="width:200px;height:100px">Up</button>
-    </form>
-  
-  
-    <form method="GET" action="/Stop">
-        <button type="submit" style="width:200px;height:100px">Stop</button>
-    </form>
-  
-  
-    <form method="GET" action="/Down">
-        <button type="submit" style="width:200px;height:100px">Down</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北寺尾ガレージシャッター</title>
+    <style>
+        /* 全体のレイアウト設定 */
+        html, body {
+            height: 100%; /* 高さを100%に設定 */
+            margin: 0; /* デフォルトのマージンを削除 */
+            display: flex; /* フレックスボックスで中央揃え */
+            justify-content: center; /* 横方向に中央揃え */
+            align-items: center; /* 縦方向に中央揃え */
+            text-align: center; /* テキストを中央揃え */
+        }
 
-    <p></p>
-    <a href="/logout">Logout</a>
+        /* コンテンツのラッパー */
+        .container {
+            max-width: 90vw; /* コンテンツ幅を画面幅の90%に制限 */
+        }
+
+        /* ボタンのスタイル */
+        button {
+            width: 100%; /* ボタンの幅を親要素に合わせる */
+            height: 120px; /* ボタンの高さを120pxに設定 */
+            font-size: 1.5em; /* ボタンのフォントサイズを大きく設定 */
+            margin: 10px 0; /* 上下にマージンを設定 */
+        }
+
+        /* リンクのスタイル（オプション） */
+        a {
+            display: block;
+            margin-top: 20px; /* リンクとボタンの間にスペースを追加 */
+            font-size: 1.2em; /* リンクのフォントサイズを少し大きく */
+        }
+
+        /* スマートフォン向けのスタイル */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 95vw; /* スマートフォンでは画面幅の95%に設定 */
+            }
+
+            button {
+                font-size: 1.2em; /* スマートフォンではフォントサイズを少し小さく */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>北寺尾ガレージ</h2>
+        <p>Press Button to control shutter</p>
+
+        <form method="GET" action="/Up">
+            <button type="submit">Up</button>
+        </form>
+
+        <form method="GET" action="/Stop">
+            <button type="submit">Stop</button>
+        </form>
+
+        <form method="GET" action="/Down">
+            <button type="submit">Down</button>
+        </form>
+
+        <a href="/logout">Logout</a>
+    </div>
 </body>
 </html>
-
