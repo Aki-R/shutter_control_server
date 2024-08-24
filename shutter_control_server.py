@@ -69,6 +69,14 @@ def get_back():
     return redirect(url_for('index'))
 
 
+@app.route('/Light')
+def get_light():
+    if session['login'] is True:
+        print('Server:Light')
+        q.put('Light\n')
+    return redirect(url_for('index'))
+
+
 def server_run():
     control_server = threading.Thread(target=esp32_socket.main, args=(q,))
     control_server.start()
