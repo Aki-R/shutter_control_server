@@ -5,7 +5,7 @@ import esp32_socket
 import json
 
 
-q = queue.Queue()
+q = queue.Queue(maxsize=2)
 
 app = Flask(__name__)
 
