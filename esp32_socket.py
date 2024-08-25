@@ -26,7 +26,7 @@ def main(q):
             conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")
             try:
-                command = q.get()
+                command = q.get(timeout=300)
                 print(f'Socket:{command}')
                 if len(command) > 0:
                     conn.sendall(command.encode())
