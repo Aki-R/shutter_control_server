@@ -21,17 +21,20 @@ def main(q):
     init()
     while True:
         try:
-            #listenSocket.settimeout()
+            listenSocket.settimeout(1)
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")
             try:
                 command = q.get(timeout=300)
+                # Clear Queue
+                while not q.empty():
+                    q.get()
                 print(f'Socket:{command}')
                 if len(command) > 0:
                     conn.sendall(command.encode())
             except Exception as e:
-                print(f'Error: command timeout{e}')
+                print(f'Error:{e}')
             conn.close()    # 接続を切断
             print("connection closed")
         except Exception as e:
