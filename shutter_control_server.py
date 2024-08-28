@@ -5,7 +5,7 @@ import esp32_socket
 import json
 
 
-q = queue.Queue(maxsize=2)
+q = queue.LifoQueue()
 
 app = Flask(__name__)
 
