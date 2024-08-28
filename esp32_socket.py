@@ -33,6 +33,9 @@ def main(q):
                 print(f'Socket:{command}')
                 if len(command) > 0:
                     conn.sendall(command.encode())
+                conn.settimeout(0.5)
+                data = conn.recv(1024)
+                print(f"Client: {data.decode()}")
             except Exception as e:
                 print(f'Error:{e}')
             conn.close()    # 接続を切断
