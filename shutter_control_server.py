@@ -6,6 +6,8 @@ import json
 
 
 q = queue.LifoQueue()
+ipadr = queue.Queue(maxsize=1)
+ipadr_str = "No IP"
 
 app = Flask(__name__)
 
@@ -19,9 +21,12 @@ with open('config.json', 'r') as file:
 
 @app.route('/')
 def index():
+    global ipadr_str
     if 'login' in session:
         if session['login'] is True:
-            return render_template('top.html')
+            if not ipadr.empty():
+                ipadr_str = str(ipadr.get())
+            return render_template('top.html', ip_str=ipadr_str)
     return redirect(url_for('login'))
 
 
@@ -32,6 +37,7 @@ def login():
 
         if input_password == password:
             session['login'] = True
+
             return redirect(url_for('index'))
         else:
             return 'Invalid username/password'
@@ -78,7 +84,7 @@ def get_light():
 
 
 def server_run():
-    control_server = threading.Thread(target=esp32_socket.main, args=(q,))
+    control_server = threading.Thread(target=esp32_socket.main, args=(q,ipadr,))
     control_server.start()
     app.run(host=host, port=port, debug=False, use_reloader=False)
 

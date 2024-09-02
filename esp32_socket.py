@@ -18,13 +18,14 @@ def init():
     listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,  1)
 
 
-def main(q):
+def main(q, ipadr):
     init()
     while True:
         try:
             listenSocket.settimeout(60)
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
+            ipadr.put(addr)
             print(addr, "connected")
             try:
                 command = q.get(timeout=300)
@@ -48,4 +49,5 @@ def main(q):
 
 if __name__ == '__main__':
     queq = queue.Queue()
-    main(queq)
+    ip = queue.Queue()
+    main(queq, ip)
