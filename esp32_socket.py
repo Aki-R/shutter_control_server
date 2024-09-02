@@ -1,6 +1,7 @@
 import socket   # モジュールのインポート
 import queue
 import json
+import time
 
 
 listenSocket = socket.socket()  # socketを作成
@@ -21,7 +22,7 @@ def main(q):
     init()
     while True:
         try:
-            listenSocket.settimeout(1)
+            listenSocket.settimeout(60)
             print("accepting.....")
             conn, addr = listenSocket.accept()  # 接続を受信
             print(addr, "connected")
@@ -39,6 +40,7 @@ def main(q):
             print("connection closed")
         except Exception as e:
             print(f'Error: {e}')
+            time.sleep(1)
         except KeyboardInterrupt:
             conn.close()
             listenSocket.close()
