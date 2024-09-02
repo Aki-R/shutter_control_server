@@ -3,5 +3,6 @@
     "secret_key": "secret_key",
     "port": 8000,
     "socket_port": 8010,
-    "host": "127.0.0.1"
+    "host": "127.0.0.1",
+    "page_title": "ガレージシャッター"
 }

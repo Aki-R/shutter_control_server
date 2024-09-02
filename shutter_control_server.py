@@ -8,6 +8,7 @@ import json
 q = queue.LifoQueue()
 ipadr = queue.Queue(maxsize=1)
 ipadr_str = "No IP"
+page_title = "page title"
 
 app = Flask(__name__)
 
@@ -17,16 +18,18 @@ with open('config.json', 'r') as file:
     password = data['password']
     port = data['port']
     host = data['host']
+    page_title = data['page_title']
 
 
 @app.route('/')
 def index():
     global ipadr_str
+    global page_title
     if 'login' in session:
         if session['login'] is True:
             if not ipadr.empty():
                 ipadr_str = str(ipadr.get())
-            return render_template('top.html', ip_str=ipadr_str)
+            return render_template('top.html', ip_str=ipadr_str, page_title=page_title)
     return redirect(url_for('login'))
 
 
